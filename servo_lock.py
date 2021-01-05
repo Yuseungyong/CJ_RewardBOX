@@ -1,11 +1,11 @@
 import RPi.GPIO as GPIO
 import time
 
-servoPin = 10
+servoPin = 12
 servoMax = 12
 servoMin = 3
 
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 GPIO.setup(servoPin, GPIO.OUT)
 
 servo = GPIO.PWM(servoPin, 50)
@@ -19,12 +19,10 @@ def setServoPos(degree):
     print("Degree: {}, Duty: {}".format(degree, duty))
     servo.ChangeDutyCycle(duty)
 
-setServoPos(0)
-time.sleep(1)
-setServoPos(50)
-time.sleep(1)
-setServoPos(0)
-time.sleep(1)
-
-servo.stop()
+while True:
+    setServoPos(0)
+    time.sleep(1)
+    setServoPos(120)
+    time.sleep(1)
+    
 GPIO.cleanup
