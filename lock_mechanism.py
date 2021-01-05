@@ -4,7 +4,7 @@ import time
 pin_IR = 17
 pin_servo_open = 16
 pin_servo_lock = 27
-pin_switch = 21
+pin_switch = 20
 servoMax = 12
 servoMin = 3
 
@@ -24,7 +24,6 @@ servo_lock.start(0)
 IR_cnt = 0
 switch_cnt = 0
 lock_switch = 0
-open_switch = 0
 
 def servo_open_pos(degree):
     if degree > 180:
@@ -43,36 +42,60 @@ def servo_lock_pos(degree):
     servo_lock.ChangeDutyCycle(duty)
 
     
+#open_init
+#servo
+servo_lock_pos(0)
+servo_open_pos(0)
+time.sleep(1)
+
 
 while True:
-    #IR detected
-    if GPIO.input(pin_IR) == 1:
-        IR_cnt += 1
-    
+
     #lock
-    if IR_cnt >= 5 and lock_switch == 0:
-        print("lock")
-        servo_lock_pos(120)
-        time.sleep(1)
-        servo_lock.stop()
+    if lock_switch == 0:
+        #IR detected
+        if GPIO.input(pin_IR) == 1:
+            IR_cnt += 1
+        
+        #servo
+        if IR_cnt >= 10:
+            print("lock", IR_cnt)
 
-        lock_switch = 1
+            servo_lock_pos(120)
+            #time.sleep(1)
+            
+            servo_open_pos(0)
+            time.sleep(1)
 
-    #bpm
-    print(switch_cnt)
-    if GPIO.input(pin_switch) == 1:
-        switch_cnt += 1
+            lock_switch = 1
+            IR_cnt = 0
+
     #open
-    if switch_cnt >= 5 and open_switch == 0:
-        print("open")
-        servo_open_pos(120)
-        time.sleep(1)
-        servo_open.stop()
+    #print(switch_cnt)
+    elif lock_switch == 1:
+        if GPIO.input(pin_switch) == 1:
+            switch_cnt += 1
+        #servo
+        if switch_cnt >= 5:
+            print("open", switch_cnt)
 
-        open_switch = 1
+            servo_lock_pos(0)
+            time.sleep(0.5)
 
+            servo_open_pos(120)
+            time.sleep(0.5)
+
+            servo_open_pos(0)
+            time.sleep(0.5)
+
+            lock_switch = 0
+            switch_cnt = 0
+
+    #servo_lock.stop()
+    #servo_open.stop()
 
     #pedometer
     time.sleep(0.1)
+    print(IR_cnt, switch_cnt, lock_switch)
 
 GPIO.cleanup

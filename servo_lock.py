@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-servoPin = 12
+servoPin = 27
 servoMax = 12
 servoMin = 3
 
@@ -20,9 +20,12 @@ def setServoPos(degree):
     servo.ChangeDutyCycle(duty)
 
 while True:
+
     setServoPos(0)
     time.sleep(1)
+
     setServoPos(120)
     time.sleep(1)
-    
+
+
 GPIO.cleanup
