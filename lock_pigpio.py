@@ -64,9 +64,6 @@ try:
                 lock_switch = 0
                 switch_cnt = 0
 
-        #servo_lock.stop()
-        #servo_open.stop()
-
         #pedometer
         time.sleep(0.1)
         print(IR_cnt, switch_cnt, lock_switch)
