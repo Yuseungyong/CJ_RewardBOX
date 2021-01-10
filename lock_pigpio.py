@@ -3,10 +3,10 @@ import time
 import pigpio
 pi = pigpio.pi() # Connect to local Pi.
 
-pin_IR = 17
-pin_servo_open = 16
-pin_servo_lock = 27
-pin_switch = 20
+pin_IR = 16
+pin_servo_open = 20
+pin_servo_lock = 21
+pin_switch = 26
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(pin_IR,GPIO.IN)

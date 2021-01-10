@@ -1,11 +1,5 @@
 import paho.mqtt.client as mqtt
 import sys
-import RPi.GPIO as GPIO
-
-
-pin_switch = 26
-GPIO.setup(pin_switch, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
-step_switch = 0
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
@@ -20,9 +14,6 @@ def on_connect(client, userdata, flags, rc):
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
     step = int(msg.payload)
-    if GPIO.input(pin_switch) == 1:
-        step_switch = step
-    step = step - step_switch
     #print (step)
     file = open('STEP_output.txt','w')
     step_str = str(step)
