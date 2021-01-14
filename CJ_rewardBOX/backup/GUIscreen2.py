@@ -33,9 +33,9 @@ class MyMplCanvas(FigureCanvas):
 class AnimationWidget(QWidget):
     def __init__(self):
         QMainWindow.__init__(self)
+        self.setWindowFlag(Qt.FramelessWindowHint)
         vbox = QVBoxLayout()
         self.canvas = MyMplCanvas(self, width=10, height=8, dpi=100)
-
         self.BPM_button = QPushButton("BPM", self)
         self.STEP_button = QPushButton("STEP", self)
         self.LOCK_button = QPushButton("LOCK", self)
@@ -67,7 +67,7 @@ class AnimationWidget(QWidget):
         self.label1 = QLabel('STEP:', self)
         self.label1.setAlignment(Qt.AlignRight)                                         #STEP font alignment
         font1 = self.label1.font()
-        font1.setPointSize(100)                                                         #STEP font size
+        font1.setPointSize(30)                                                         #STEP font size
         self.label1.setFont(font1)
 
         self.stepNumber = QLCDNumber(self)
@@ -164,9 +164,8 @@ class AnimationWidget(QWidget):
         timer = Timer(1, self.showStepNum)
         timer.start()
 
-
-if __name__ == "__main__":
+def main():
     qApp = QApplication(sys.argv)
     aw = AnimationWidget()
-    aw.show()
+    aw.showFullScreen()
     sys.exit(qApp.exec_())
