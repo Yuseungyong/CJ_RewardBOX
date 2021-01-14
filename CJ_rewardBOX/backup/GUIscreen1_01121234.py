@@ -56,18 +56,18 @@ class AnimationWidget(QWidget):
         self.label2 = QLabel('REWARD BOX', self)
         self.label2.setAlignment(Qt.AlignCenter)
         font2 = self.label2.font()
-        font2.setPointSize(30)                                                          # REWARDBOX font size
+        font2.setPointSize(20)                                                          # REWARDBOX font size
         self.label2.setFont(font2)
 
         self.label1 = QLabel('STEP:', self)
         self.label1.setAlignment(Qt.AlignRight)                                         #STEP font alignment
         font1 = self.label1.font()
-        font1.setPointSize(100)                                                         #STEP font size
+        font1.setPointSize(30)                                                         #STEP font size
         self.label1.setFont(font1)
 
         self.stepNumber = QLCDNumber(self)
         self.stepNumber.setDigitCount(3)                                                #STEP number digit 자리수
-        self.stepNumber.setMinimumHeight(40)                                            #STEP number 크기
+        self.stepNumber.setMinimumHeight(30)                                            #STEP number 크기
 
         hbox2 = QHBoxLayout()
         hbox2.addWidget(self.label2, Qt.AlignCenter)

@@ -14,7 +14,7 @@ def on_connect(client, userdata, flags, rc):
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
     step = int(msg.payload)
-    #print (step)
+    print (step)
     file = open('STEP_output.txt','w')
     step_str = str(step)
     file.write(step_str)
@@ -25,7 +25,7 @@ client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
 
-client.connect("192.168.0.51", 1883, 60)
+client.connect("192.168.0.61", 1883, 60)
 
 # Blocking call that processes network traffic, dispatches callbacks and
 # handles reconnecting.
