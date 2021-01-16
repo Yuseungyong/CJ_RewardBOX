@@ -1,0 +1,7 @@
+Arduino_LSM6DS3
+PubSubClient
+PulseSensorPlayground
+Adafruit_NeoPixel
+Accelerometer And Gyroscope LSM6DS3
+WIFININA
+SparkFun MAX3010x Pulse and Proximity Sensor Library => max30105.h 수정 (Change this : #define I2C_SPEED_FAST  400000 => To this : #define I2C_SPEED_FAST  250000)
